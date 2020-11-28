@@ -14,7 +14,7 @@ Statistic II (Dynamic linear models and statistical forecasts) project
 
 -   **Samuele Ferri**: [Site](https://samuelexferri.com), [GitHub](https://github.com/samuelexferri)
 -   **Lorenzo Conti**
--   **Fabio Sangregorio**
+-   **Fabio Sangregorio**: [Site](https://fabio.sangregorio.dev), [GitHub](https://github.com/fabiosangregorio)
 -   **Matteo Tufilli**
 
 ## Version
