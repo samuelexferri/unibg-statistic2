@@ -1,3 +1,4 @@
 .vscode
 datasets/CAMS-GLOB-ANT_Glb_0.1x0.1_anthro_nh3_v4.2_monthly.nc
 datasets/dtr_mon_0.1deg_reg_ens_median_E-OBSv20.0e.nc
+env
