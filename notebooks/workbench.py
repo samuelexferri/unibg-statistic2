@@ -1,6 +1,7 @@
 import xarray as xr
 import matplotlib.pyplot as plt
 import numpy as np
+import multiprocess
 
 def adjust_var_grid(ds_ammoniaca, ds_temperature, var):
     """
@@ -11,7 +12,7 @@ def adjust_var_grid(ds_ammoniaca, ds_temperature, var):
     lat_bounds = slice(44.74, 46.56)
     lon_bounds = slice(8.5, 11.25)
 
-    ammoniaca = ds_ammoniaca.__xarray_dataarray_variable__.sel(
+    ammoniaca = ds_ammoniaca.agl.sel(
         lat=lat_bounds, lon=lon_bounds
     )
 
