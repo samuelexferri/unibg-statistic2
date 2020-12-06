@@ -44,10 +44,3 @@ def adjust_var_grid(ds, target_lats, target_lons, dims=["time", "lat", "lon"], s
         plt.show()
 
     return ds_adjusted
-
-# ds_nh3 = xr.load_dataset('./datasets/CAMS-GLOB-ANT_Glb_0.1x0.1_anthro_nh3_v4.2_monthly_lombardia.nc')
-# ds = xr.load_dataset('./datasets/temperature.nc')
-# ds = ds.t2m
-# ds = ds.transpose("time", "latitude", "longitude")
-# ds = ds.sortby("latitude", ascending=True)  # Riordina
-# res = adjust_var_grid(ds, ds_nh3.lat, ds_nh3.lon, plot=True)
