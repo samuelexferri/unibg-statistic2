@@ -2,68 +2,51 @@ import xarray as xr
 import matplotlib.pyplot as plt
 import numpy as np
 
-
-def adjust_var_grid(ds_ammoniaca, ds_temperature, var):
+# TODO: invertire assi temperatura prima di passarla come argomento
+    # ds = ds.transpose("time", "latitude", "longitude")
+    # ds = ds.sortby("latitude", ascending=True)  # Riordina
+def adjust_var_grid(ds, target_lats, target_lons, dims=["time", "lat", "lon"], shift=0.051, plot=False):
     """
     Adjust grid of input variable layer
-    adjust_var_grid("../datasets/CAMS-GLOB-ANT_Glb_0.1x0.1_anthro_nh3_v4.2_monthly_lombardia.nc", "../datasets/temperature.nc", "t2m")
     """
-    ds_ammoniaca = xr.load_dataset(ds_ammoniaca)  # Copernicus (0.1°x0.1°)
-    lat_bounds = slice(44.74, 46.56)
-    lon_bounds = slice(8.5, 11.25)
+    lat_bounds = slice(min(target_lats) - shift, max(target_lats) + shift) 
+    lon_bounds = slice(min(target_lons) - shift, max(target_lons) + shift)
 
-    ammoniaca = ds_ammoniaca.agl.sel(lat=lat_bounds, lon=lon_bounds)
+    ds = ds.sel(latitude=lat_bounds, longitude=lon_bounds)
 
-    ds_temperature = xr.load_dataset(ds_temperature)  # Copernicus (0.1°x0.1°)
-    lat_bounds = slice(46.66, 44.64)  # Invertiti
-    lon_bounds = slice(8.5, 11.35)
+    lats = ds.latitude
+    lons = ds.longitude
 
-    var = ds_temperature.t2m.sel(latitude=lat_bounds, longitude=lon_bounds)
-    lai_hv = ds_temperature.lai_hv.sel(latitude=lat_bounds, longitude=lon_bounds)
-    lai_lv = ds_temperature.lai_lv.sel(latitude=lat_bounds, longitude=lon_bounds)
+    times = ds.time.to_series().tolist()
 
-    var = var.transpose("time", "latitude", "longitude")
-    var = var.sortby("latitude", ascending=True)  # Riordina
+    ds_adjusted_data = np.ones((len(times), len(target_lats), len(target_lons)))
+    ds_adjusted_data.fill(np.nan)
 
-    lats = var.latitude
-    lons = var.longitude
-    ammoniaca_lats = ammoniaca.lat
-    ammoniaca_lons = ammoniaca.lon
+    for lat in range(1, len(lats)):
+        for lon in range(1, len(lons)):
+            mean = (
+                ds[:, lat - 1, lon - 1] * 0.25
+                + ds[:, lat - 1, lon] * 0.25
+                + ds[:, lat, lon - 1] * 0.25
+                + ds[:, lat, lon] * 0.25
+            )
+            ds_adjusted_data[:, lat - 1, lon - 1] = mean
 
-    coords = [
-        (lat, lon) for lat in lats.to_series() for lon in lons.to_series().tolist()
-    ]
-    ammoniaca_coords = [
-        (lat, lon)
-        for lat in ammoniaca_lats.to_series()
-        for lon in ammoniaca_lons.to_series().tolist()
-    ]
-
-    lats = [coord[0] for coord in coords]
-    lons = [coord[1] for coord in coords]
-
-    times = var.time.to_series().tolist()
-
-    t2m_adjusted_data = np.ones((len(times), len(ammoniaca.lat), len(ammoniaca.lon)))
-    t2m_adjusted_data.fill(np.nan)
-
-    for t in range(len(times)):
-        print("Adjusting time: " + str(t))
-        for lt in range(1, len(ammoniaca.lat) - 1):
-            for ln in range(1, len(ammoniaca.lon) - 1):
-                val = (
-                    var[t][lt - 1][ln - 1]
-                    + var[t][lt - 1][ln + 1]
-                    + var[t][lt + 1][ln - 1]
-                    + var[t][lt + 1][ln + 1]
-                )
-                t2m_adjusted_data[t][lt][ln] = val / 4
-
-    t2m_adjusted = xr.DataArray(
-        t2m_adjusted_data,
-        coords=[times, ammoniaca.lat, ammoniaca.lon],
-        dims=["time", "lat", "lon"],
+    ds_adjusted = xr.DataArray(
+        ds_adjusted_data,
+        coords=[times, target_lats, target_lons],
+        dims=dims,
     )
 
-    print("Adjusted!")
-    return t2m_adjusted
+    if plot:
+        ds_adjusted.mean(dim='time').plot()
+        plt.show()
+
+    return ds_adjusted
+
+# ds_nh3 = xr.load_dataset('./datasets/CAMS-GLOB-ANT_Glb_0.1x0.1_anthro_nh3_v4.2_monthly_lombardia.nc')
+# ds = xr.load_dataset('./datasets/temperature.nc')
+# ds = ds.t2m
+# ds = ds.transpose("time", "latitude", "longitude")
+# ds = ds.sortby("latitude", ascending=True)  # Riordina
+# res = adjust_var_grid(ds, ds_nh3.lat, ds_nh3.lon, plot=True)
