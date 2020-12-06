@@ -2,8 +2,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 from shapely.geometry import Point
 
+
 def filter_grid_on_shapefile(lats, lons, shp, plot_grid=False, plot_filter=False):
-    # create the latitudes/longitudes grid
+    """
+    Filter grid on shapefile
+    """
+    # Create the latitudes/longitudes grid
     coords = [(lat, lon) for lat in lats for lon in lons]
 
     lats = [coord[0] for coord in coords]
@@ -17,7 +21,7 @@ def filter_grid_on_shapefile(lats, lons, shp, plot_grid=False, plot_filter=False
         plt.scatter(lons, lats, c="r")
         plt.show()
 
-    # consider only the points inside the shape
+    # Consider only the points inside the shape
     grid = [
         (round(lat, 2), round(lon, 2))
         for lat, lon in zip(lats, lons)
@@ -39,6 +43,9 @@ def filter_grid_on_shapefile(lats, lons, shp, plot_grid=False, plot_filter=False
 
 
 def filter_data_on_shapefile(data, lats, lons, shp, plot_grid=False, plot_filter=False):
+    """
+    Filter data on shapefile
+    """
     lats = [round(lat, 2) for lat in lats.to_series().tolist()]
     lons = [round(lon, 2) for lon in lons.to_series().tolist()]
 

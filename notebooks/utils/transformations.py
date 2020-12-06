@@ -2,12 +2,13 @@ import xarray as xr
 import matplotlib.pyplot as plt
 import numpy as np
 
-# TODO: invertire assi temperatura prima di passarla come argomento
+
+# TODO: Invertire assi temperatura prima di passarla come argomento
     # ds = ds.transpose("time", "latitude", "longitude")
     # ds = ds.sortby("latitude", ascending=True)  # Riordina
 def adjust_var_grid(ds, target_lats, target_lons, dims=["time", "lat", "lon"], shift=0.051, plot=False):
     """
-    Adjust grid of input variable layer
+    Adjust grid of input dataset variable layer
     """
     lat_bounds = slice(min(target_lats) - shift, max(target_lats) + shift) 
     lon_bounds = slice(min(target_lons) - shift, max(target_lons) + shift)
