@@ -10,7 +10,11 @@ def adjust_var_grid(ds, target_lats, target_lons, dims=["time", "lat", "lon"], s
     """
     Adjust grid of input dataset variable layer
     """
-    lat_bounds = slice(min(target_lats) - shift, max(target_lats) + shift) 
+    # Convert to float32 in order to avoid problems
+    target_lats = np.float32(target_lats)
+    target_lons = np.float32(target_lons)
+
+    lat_bounds = slice(min(target_lats) - shift, max(target_lats) + shift)
     lon_bounds = slice(min(target_lons) - shift, max(target_lons) + shift)
 
     ds = ds.sel(latitude=lat_bounds, longitude=lon_bounds)
@@ -35,8 +39,9 @@ def adjust_var_grid(ds, target_lats, target_lons, dims=["time", "lat", "lon"], s
 
     ds_adjusted = xr.DataArray(
         ds_adjusted_data,
-        coords=[times, target_lats, target_lons],
+        coords=[times, np.float32(target_lats), np.float32(target_lons)],
         dims=dims,
+        name="par"
     )
 
     if plot:

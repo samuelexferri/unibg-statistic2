@@ -49,7 +49,7 @@ def filter_data_on_shapefile(data, lats, lons, shp, plot_grid=False, plot_filter
     lats = [round(lat, 2) for lat in lats.to_series().tolist()]
     lons = [round(lon, 2) for lon in lons.to_series().tolist()]
 
-    result = np.ones((252, len(lats), len(lons)))
+    result = np.ones((248, len(lats), len(lons))) # Times length = 248 (2000-01 to 2020-08)
     result.fill(np.nan)
 
     grid = filter_grid_on_shapefile(
