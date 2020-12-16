@@ -42,10 +42,13 @@ def filter_grid_on_shapefile(lats, lons, shp, plot_grid=False, plot_filter=False
     return grid
 
 
-def filter_data_on_shapefile(data, lats, lons, shp, plot_grid=False, plot_filter=False):
+def filter_data_on_shapefile(data, lats, lons, shp, epsg=None, plot_grid=False, plot_filter=False):
     """
     Filter data on shapefile
     """
+    if epsg is not None:
+        shp.to_crs(epsg=epsg, inplace=True)
+
     lats = [round(lat, 2) for lat in lats.to_series().tolist()]
     lons = [round(lon, 2) for lon in lons.to_series().tolist()]
 
