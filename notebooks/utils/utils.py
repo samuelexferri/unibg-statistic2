@@ -8,4 +8,11 @@ def xarray2pandas(dataset, lat, lon):
     -------
         `pandas.core.series.Series` time series
     """
-    return dataset[:,lat,lon].to_series()
+    return dataset[:, lat, lon].to_series()
+
+
+def ts_train_test_split(ts, ratio):
+    return ts[:int(len(ts)*ratio)], ts[int(len(ts)*ratio):]
+
+
+

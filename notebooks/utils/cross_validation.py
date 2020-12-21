@@ -6,35 +6,24 @@ import statsmodels as sm
 import matplotlib.pyplot as plt
 from utils import utils
 
-def slice_and_select_timeserie(data, lon, lat, start_time, end_time):
-    """
-    Slice (time) and select (coordinates) a timeserie
-    """
 
-    # Converting xarray to pandas and select the coordinates
-    data = utils.xarray2pandas(data, lon, lat)
-
-    # Selecting original training dataset
-    data = data[start_time:end_time]
-
-    return data
 
 
 def cross_validation(data, k, p, d, q, plot=False):
     """
     Cross validation
     """
-
-    n = len(nh3_max)
+    n = len(data)
     rmse = []
-    # TODO (AIC; BIC)
+    aics = []
+    bics = []
 
     for i in range(k - 1):
         start = ((n * (i + 1)) / k )
 
         # Divide data into two dataset: training and validation
-        train_set = nh3_max[0:int(start)].to_period('M')
-        validation_set = nh3_max[int(start):int(start+int(n/k))].to_period('M')
+        train_set = data[0:int(start)].to_period('M')
+        validation_set = data[int(start):int(start+int(n/k))].to_period('M')
 
         # Model fitting
         model = sm.tsa.arima.model.ARIMA(train_set, order=(p,d,q))
