@@ -7,6 +7,7 @@ def filter_grid_on_shapefile(lats, lons, shp, plot_grid=False, plot_filter=False
     """
     Filter grid on shapefile
     """
+
     # Create the latitudes/longitudes grid
     coords = [(lat, lon) for lat in lats for lon in lons]
 
@@ -46,6 +47,7 @@ def filter_data_on_shapefile(data, lats, lons, shp, epsg=None, plot_grid=False, 
     """
     Filter data on shapefile
     """
+    
     if epsg is not None:
         shp.to_crs(epsg=epsg, inplace=True)
 

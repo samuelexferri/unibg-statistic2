@@ -3,13 +3,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-# TODO: Invertire assi temperatura prima di passarla come argomento
+# Invertire assi temperatura prima di passarla come argomento
     # ds = ds.transpose("time", "latitude", "longitude")
     # ds = ds.sortby("latitude", ascending=True)  # Riordina
 def adjust_var_grid(ds, target_lats, target_lons, dims=["time", "lat", "lon"], shift=0.051, plot=False):
     """
     Adjust grid of input dataset variable layer
     """
+    
     # Convert to float32 in order to avoid problems
     target_lats = np.float32(target_lats)
     target_lons = np.float32(target_lons)

@@ -18,6 +18,9 @@ from scipy.stats import norm
 
 
 def plot_distributions(ts, title):
+    """
+    Plot distributions
+    """
     fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(10, 5))
     result = axs[0].hist(ts, bins=20)
     fig.suptitle(title)
