@@ -53,8 +53,9 @@ def filter_data_on_shapefile(data, lats, lons, shp, epsg=None, plot_grid=False, 
 
     lats = [round(lat, 2) for lat in lats.to_series().tolist()]
     lons = [round(lon, 2) for lon in lons.to_series().tolist()]
+    times = len(data.time.to_series().tolist())
 
-    result = np.ones((248, len(lats), len(lons))) # Times length = 248 (2000-01 to 2020-08)
+    result = np.ones((times, len(lats), len(lons))) # Times length = 248 (2000-01 to 2020-08)
     result.fill(np.nan)
 
     grid = filter_grid_on_shapefile(
@@ -63,9 +64,8 @@ def filter_data_on_shapefile(data, lats, lons, shp, epsg=None, plot_grid=False, 
 
     for lat_idx, lat in enumerate(lats):
         for lon_idx, lon in enumerate(lons):
-
             if (lat, lon) in grid:
-                for time_idx in range(len(data.time.to_series().tolist())):
+                for time_idx in range(times):
                     result[time_idx][lat_idx][lon_idx] = data[
                         time_idx, lat_idx, lon_idx
                     ].values
