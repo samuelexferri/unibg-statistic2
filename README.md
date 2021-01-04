@@ -6,6 +6,10 @@
 
 Statistic II (Dynamic linear models and statistical forecasts) project
 
+Analysis of ammonia emissions in Lombardy (2000-2020) in Python using Jupyter
+
+![Jupyter](https://jupyter.org/)
+
 ![alt text](https://img.shields.io/badge/Language-Italian-infomrmational?style=for-the-badge)
 
 ## Authors
