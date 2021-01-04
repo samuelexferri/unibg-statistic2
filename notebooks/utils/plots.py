@@ -17,7 +17,7 @@ import numpy as np
 from scipy.stats import norm
 
 
-def plot_distributions(ts, title, xlabel, ylabel):
+def plot_distributions(ts, title='', xlabel='',):
     """
     Plot distributions
     """
