@@ -1,0 +1,160 @@
+****************************************************** ROLLING
+
+train_data, test_data = utils.ts_train_test_split(nh3, .8)
+initial_train_months=36,
+validation_data = ts[train_months:train_months+24] 
+
+AIC
+{'index': 14,
+ 'order': (2, 0, 0),
+ 'seasonal_order': (1, 0, 0, 12),
+ 'aic': -3970.595661703049,
+ 'bic': -3954.9021001005494,
+ 'rmse': 1.0713304353430892e-06,
+ 'acf': 0.10567102077368881}
+
+BIC
+{'index': 14,
+ 'order': (2, 0, 0),
+ 'seasonal_order': (1, 0, 0, 12),
+ 'aic': -3970.595661703049,
+ 'bic': -3954.9021001005494,
+ 'rmse': 1.0713304353430892e-06,
+ 'acf': 0.10567102077368881}
+
+RMSE
+{'index': 14,
+ 'order': (2, 0, 0),
+ 'seasonal_order': (1, 0, 0, 12),
+ 'aic': -3970.595661703049,
+ 'bic': -3954.9021001005494,
+ 'rmse': 1.0713304353430892e-06,
+ 'acf': 0.10567102077368881}
+
+ACF
+{'index': 38,
+ 'order': (4, 0, 0),
+ 'seasonal_order': (1, 0, 0, 12),
+ 'aic': -3772.7489048713223,
+ 'bic': -3750.777918627824,
+ 'rmse': 1.4106658706993633e-06,
+ 'acf': 0.08859593342426406}
+
+	const		ar.L1		ar.L2		ar.S.L12	sigma2
+value	0.000163	1.453433	-0.737639	0.999624	2.838353e-12
+pvalue	0.224917	0.000000	0.000000	0.000000	9.847158e-01
+
+
+****************************************************** RANDOM
+
+train_months = 120
+validation_months = 24
+train_data, test_data = utils.ts_train_test_split(nh3, .7)
+
+AIC
+{'index': 14,
+ 'order': (2, 0, 0),
+ 'seasonal_order': (1, 0, 0, 12),
+ 'aic': -2597.410367799081,
+ 'bic': -2583.5147503335234,
+ 'rmse': 1.576102249127458e-05,
+ 'acf': 0.1469689969885606}
+
+
+BIC
+{'index': 14,
+ 'order': (2, 0, 0),
+ 'seasonal_order': (1, 0, 0, 12),
+ 'aic': -2597.410367799081,
+ 'bic': -2583.5147503335234,
+ 'rmse': 1.576102249127458e-05,
+ 'acf': 0.1469689969885606}
+
+RMSE
+{'index': 38,
+ 'order': (4, 0, 0),
+ 'seasonal_order': (1, 0, 0, 12),
+ 'aic': -2503.2106975648253,
+ 'bic': -2483.756833113045,
+ 'rmse': 7.648942779669005e-06,
+ 'acf': 0.13453557392498675}
+
+ACF
+{'index': 38,
+ 'order': (4, 0, 0),
+ 'seasonal_order': (1, 0, 0, 12),
+ 'aic': -2503.2106975648253,
+ 'bic': -2483.756833113045,
+ 'rmse': 7.648942779669005e-06,
+ 'acf': 0.13453557392498675}
+
+
+	
+	const		ar.L1		ar.L2		ar.S.L12	sigma2
+value	0.000163	1.453433	-0.737639	0.999624	2.838353e-12
+pvalue	0.224917	0.000000	0.000000	0.000000	9.847158e-01
+
+Residui eteroschedastici
+pvalue:  3.676505323916431e-11
+
+jarque bera test: not normally distributed, pvalue: 0.002626519627236606
+lilliefors test: not normally distributed, pvalue: 0.0009999999999998899
+ljungbox ['Correlated', 'Correlated', 'Correlated', 'Correlated', 'Correlated']
+
+************************************************************************ REGRESSION
+
+train_data, test_data = utils.ts_train_test_split(df, .9)
+train_months = 150
+validation_months = 12
+
+AIC
+{'index': 165,
+ 'harmonic_order': 4,
+ 'order': (3, 0, 0),
+ 'seasonal_order': (1, 0, 1, 12),
+ 'aic': -3419.07729586434,
+ 'bic': -3373.917766452897,
+ 'rmse': 8.89880838593513e-07,
+ 'acf': 0.2662844805963496}
+
+BIC
+{'index': 165,
+ 'harmonic_order': 4,
+ 'order': (3, 0, 0),
+ 'seasonal_order': (1, 0, 1, 12),
+ 'aic': -3419.07729586434,
+ 'bic': -3373.917766452897,
+ 'rmse': 8.89880838593513e-07,
+ 'acf': 0.2662844805963496}
+
+RMSE
+{'index': 90,
+ 'harmonic_order': 1,
+ 'order': (2, 0, 0),
+ 'seasonal_order': (1, 0, 1, 12),
+ 'aic': -3233.3575780962847,
+ 'bic': -3209.2724957435144,
+ 'rmse': 3.817841531649882e-07,
+ 'acf': 0.20727020648500222}
+
+ACF
+{'index': 205,
+ 'harmonic_order': 2,
+ 'order': (3, 0, 2),
+ 'seasonal_order': (1, 0, 0, 12),
+ 'aic': -3142.1694659512905,
+ 'bic': -3106.041842422136,
+ 'rmse': 4.65269515960662e-06,
+ 'acf': 0.15375738844179374}
+
+jarque bera test: not normally distributed, pvalue: 5.96835332846078e-09
+lilliefors test: not normally distributed, pvalue: 0.0009999999999998899
+
+['Correlated', 'Correlated', 'Correlated', 'Correlated', 'Correlated', 'Correlated', 'Correlated']
+Residui eteroschedastici
+pvalue:  1.59492780800981e-10
+
+	const		sin(t)		cos(t)		sin(2t)		cos(2t)		sin(3t)		cos(3t)		sin(4t)		cos(4t)		ar.L1		ar.L2		ar.L3	ar.S.L12	ma.S.L12	sigma2
+value	0.000163	-5.850427e-05	-7.697028e-05	7.449483e-07	0.000005	8.750962e-07	-0.000005	0.000008	-6.701602e-07	-0.662795	0.758343	0.80004	0.965232	-0.340646	5.956550e-12
+pvalue	0.000018	9.952371e-146	2.306730e-230	6.179992e-01	0.005626	6.039491e-01	0.001596	0.004447	8.094182e-01	0.000000	0.000000	0.00000	0.000000	0.000000	9.647668e-01
+
