@@ -50,7 +50,7 @@ nbformat==5.0.8
 nest-asyncio==1.4.3
 netCDF4==1.5.4
 networkx==2.5
-notebook==6.1.5
+notebook==6.4.12
 numpy==1.19.3
 packaging==20.5
 pandas==1.1.4
