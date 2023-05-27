@@ -1,4 +1,4 @@
-﻿affine==2.3.0
+affine==2.3.0
 argon2-cffi==20.1.0
 astroid==2.4.2
 async-generator==1.10
@@ -92,7 +92,7 @@ testpath==0.4.4
 threadpoolctl==2.1.0
 tifffile==2020.11.26
 toml==0.10.2
-tornado==6.1
+tornado==6.3.2
 traitlets==5.0.5
 wcwidth==0.2.5
 webencodings==0.5.1
