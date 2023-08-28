@@ -92,7 +92,7 @@ testpath==0.4.4
 threadpoolctl==2.1.0
 tifffile==2020.11.26
 toml==0.10.2
-tornado==6.3.2
+tornado==6.3.3
 traitlets==5.0.5
 wcwidth==0.2.5
 webencodings==0.5.1
